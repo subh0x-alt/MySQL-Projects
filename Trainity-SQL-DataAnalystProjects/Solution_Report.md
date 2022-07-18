@@ -27,7 +27,39 @@ mysql> SHOW TABLES;
 +--------------------+
 7 rows in set (0.02 sec)
 ```
-### 2️⃣ 
+
+### 2️⃣ The marketing team wants to launch some campaigns, and they need help with determining the following:
+#### Q1. Rewarding Most Loyal Users: People who have been using the platform for the longest time.
+      Task: Find the 5 oldest users of the Instagram from the database provided.
+We use the `users` table to retrieve the data as it contains the users id, username and their joining date which is required for sorting the table and retrieving the 
+oldest users of Instagram from the database.
+```sql
+SELECT
+        id AS 'User-ID',
+        username AS 'Username',
+        created_at AS 'Joined Instagram on'
+        -- Selecting the id, username and the created_at columns with proper aliasing.
+FROM users
+ORDER BY created_at ASC 
+-- Sorting the users with respect to the created_at column using the `ORDER BY` clause in the ascending order.
+LIMIT 5; -- As we need only the First 5 users for instagram, we use the `LIMIT` clause
+```
+```sql
+mysql> source insta_task.sql
++---------+------------------+---------------------+
+| User-ID | Username         | Joined Instagram on |
++---------+------------------+---------------------+
+|      80 | Darby_Herzog     | 2016-05-06 00:14:21 |
+|      67 | Emilio_Bernier52 | 2016-05-06 13:04:30 |
+|      63 | Elenor88         | 2016-05-08 01:30:41 |
+|      95 | Nicole71         | 2016-05-09 17:30:22 |
+|      38 | Jordyn.Jacobson2 | 2016-05-14 07:56:26 |
++---------+------------------+---------------------+
+5 rows in set (0.00 sec)
+```
+
+```sql
+```
 
 ### ⚙️ Tech-Stack Used: MySQL; Code-Editor Used: VS Code
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
