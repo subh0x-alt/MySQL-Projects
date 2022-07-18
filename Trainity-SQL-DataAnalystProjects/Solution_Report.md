@@ -31,8 +31,9 @@ mysql> SHOW TABLES;
 ### 2️⃣ The marketing team wants to launch some campaigns, and they need help with determining the following:
 #### Q1. Rewarding Most Loyal Users: People who have been using the platform for the longest time.
       *Task:* Find the 5 oldest users of the Instagram from the database provided.
-We use the `users` table to retrieve the data as it contains the users id, username and their joining date which is required for sorting the table and retrieving the 
-oldest users of Instagram from the database.
+Let’s breakdown the question:
+    <p> We use the `users` table to retrieve the data as it contains the users id, username and their joining date which is required for sorting the table and retrieving the 5 oldest users of Instagram from the database using the `ORDER BY` and the `LIMIT` clause.</p>
+    
 ```sql
 SELECT
         id AS 'User-ID',
@@ -59,7 +60,8 @@ mysql> source insta_task.sql
 ```
 #### Q2. Remind Inactive Users to Start Posting: By sending them promotional emails to post their 1st photo.
      *Task:* Find the users who have never posted a single photo on Instagram.
-     
+Let’s breakdown the question:
+<p></p>
 ```sql
 SELECT 
         users.id AS 'User-ID',
@@ -103,6 +105,9 @@ mysql> source insta_task.sql
 ```
 #### Q3. Declaring Contest Winner: The team started a contest and the user who gets the most likes on a single photo will win the contest now they wish to declare the winner.
      *Task:* Identify the winner of the contest and provide their details to the team.
+Let’s breakdown the question:
+<p></p>
+
 ```sql
 SELECT  
         likes.photo_id AS 'PhotoId',
@@ -127,7 +132,9 @@ mysql> source insta_task.sql
 ```
 #### Q4. Hashtag Researching: A partner brand wants to know, which hashtags to use in the post to reach the most people on the platform.
      *Task:* Identify and suggest the top 5 most commonly used hashtags on the platform
-     
+Let’s breakdown the question:
+<p></p>
+
 ```sql
 SELECT 
         photo_tags.tag_id AS 'TagId', 
@@ -155,6 +162,8 @@ mysql> source insta_task.sql
 ```
 #### Q5. Launch AD Campaign: The team wants to know, which day would be the best day to launch ADs.
      *Task:* What day of the week do most users register on? Provide insights on when to schedule an ad campaign.
+Let’s breakdown the question:
+<p></p>
 
 ```sql
 SELECT 
@@ -180,8 +189,10 @@ mysql> source insta_task.sql
 +-------------+----------------------+
 7 rows in set (0.02 sec)
 ```
+### 3️⃣ Investor Metrics: Our investors want to know if Instagram is performing well and is not becoming redundant like Facebook, they want to assess the app on the following grounds:
 
-
+#### Q5. User Engagement: Are users still as active and post on Instagram or they are making fewer posts.
+     *Task:* Provide how many times does average user posts on Instagram. Also, provide the total number of photos on Instagram/total number of users.
 ```sql
 -- Users that posted the highest number of photos
 SELECT 
