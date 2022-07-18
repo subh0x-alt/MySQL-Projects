@@ -62,6 +62,7 @@ mysql> source insta_task.sql
      *Task:* Find the users who have never posted a single photo on Instagram.
 Let’s breakdown the question:
 <p></p>
+
 ```sql
 SELECT 
         users.id AS 'User-ID',
@@ -103,7 +104,10 @@ mysql> source insta_task.sql
 +---------+---------------------+
 26 rows in set (0.00 sec)
 ```
-#### Q3. Declaring Contest Winner: The team started a contest and the user who gets the most likes on a single photo will win the contest now they wish to declare the winner.
+
+#### Q3. Declaring Contest Winner: The team started a contest and the user who gets the most likes on a single photo 
+will win the contest now they wish to declare the winner.
+
      *Task:* Identify the winner of the contest and provide their details to the team.
 Let’s breakdown the question:
 <p></p>
@@ -131,7 +135,7 @@ mysql> source insta_task.sql
 1 row in set (0.01 sec)
 ```
 #### Q4. Hashtag Researching: A partner brand wants to know, which hashtags to use in the post to reach the most people on the platform.
-     *Task:* Identify and suggest the top 5 most commonly used hashtags on the platform
+     *Task:* Identify and suggest the top 5 most commonly used hashtags on the platform.
 Let’s breakdown the question:
 <p></p>
 
@@ -191,8 +195,10 @@ mysql> source insta_task.sql
 ```
 ### 3️⃣ Investor Metrics: Our investors want to know if Instagram is performing well and is not becoming redundant like Facebook, they want to assess the app on the following grounds:
 
-#### Q5. User Engagement: Are users still as active and post on Instagram or they are making fewer posts.
-     *Task:* Provide how many times does average user posts on Instagram. Also, provide the total number of photos on Instagram/total number of users.
+#### Q1. User Engagement: Are users still as active and post on Instagram or they are making fewer posts.
+     *Task:* Provide how many times does average user posts on Instagram. 
+     Also, provide the total number of photos on Instagram/total number of users.
+     
 ```sql
 -- Users that posted the highest number of photos
 SELECT 
@@ -243,6 +249,10 @@ mysql> source insta_task.sql
 1 row in set (0.01 sec)
 ```
 
+#### Q2. Bots & Fake Accounts: The investors want to know if the platform is crowded with fake and dummy accounts.
+     *Task:* Provide data on users (bots) who have liked every single photo on the site 
+     (since any normal user would not be able to do this).
+Very important** as we already know that Elon backed out from the twitter deal over the wrong reporting of bots and fake accounts on the social media platform.
 ```sql
 SELECT 
         users.id AS 'User ID',
