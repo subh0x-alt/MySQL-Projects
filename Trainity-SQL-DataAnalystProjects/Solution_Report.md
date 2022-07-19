@@ -349,7 +349,11 @@ mysql> source insta_task.sql
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
 ## 🎯 Result:
-Mention what have you achieved while making the project and how do you think it has helped you.
+The main takeaways from this project:
+- Learnt how to query important insights using `MySQL` on a large database with multiple tables.
+- Learnt to deal with `JOINS` on multiple tables. 
+- Learnt Aggregates in `SQL`.
+- Learnt the use of multiple subqueries in `SQL`.
 
 ## 🗃️ Drive Links:
 **Database:** [trainity_insta_analytics.sql](https://drive.google.com/file/d/1JwEPL15NfOepUSuV7HTINW7XEqpx0UzN/view?usp=sharing) <br>
