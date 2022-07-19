@@ -27,7 +27,7 @@ mysql> SHOW TABLES;
 +--------------------+
 7 rows in set (0.02 sec)
 ```
-
+## 
 ### 2️⃣ The marketing team wants to launch some campaigns, and they need help with determining the following:
 #### Q1. Rewarding Most Loyal Users: People who have been using the platform for the longest time.
       *Task:* Find the 5 oldest users of the Instagram from the database provided.
@@ -58,10 +58,12 @@ mysql> source insta_task.sql
 +---------+------------------+---------------------+
 5 rows in set (0.00 sec)
 ```
+## 
 #### Q2. Remind Inactive Users to Start Posting: By sending them promotional emails to post their 1st photo.
      *Task:* Find the users who have never posted a single photo on Instagram.
-Let’s breakdown the question:
-<p></p>
+Let’s breakdown the question:<br>
+
+As we need to find the inactive users who never posted in Instagram, we can select all those user-ids from `users` table which are not present in the user_id column of `photos` table; I have implemented it by using a `WHERE` clause and `NOT IN` operator using a nested sub-query to retrieve the `user_id` column from the `photos` table.
 
 ```sql
 SELECT 
@@ -104,13 +106,17 @@ mysql> source insta_task.sql
 +---------+---------------------+
 26 rows in set (0.00 sec)
 ```
-
+- As we can infer that there are `26 users` who never posted on instagram, the marketing team can send out personalised emails to the following users.
+- Just not posting a picture definitely does not mean that the following users are inactive, we can also set a threshold condition to identfy them based on their joining date on the platform.
+- We can also add another condition such as the no. of likes they made; if the users are not engaged in the content on Instagram, then that means they have not like any photos posted on instagram.
+## 
 #### Q3. Declaring Contest Winner: The team started a contest and the user who gets the most likes on a single photo 
 will win the contest now they wish to declare the winner.
-
      *Task:* Identify the winner of the contest and provide their details to the team.
-Let’s breakdown the question:
-<p></p>
+Let’s breakdown the question:<br>
+
+To find the winner, I selected all the relevant columns from the 3 tables (`users`, `photos`, `likes`) using an `INNER JOIN` joining them using relevant columns,
+then grouping them based on the `photo_id` column in the `likes` table and sorting them in descending order using the `ORDER BY` clause, finally using the `LIMIT` clause to retrieve only the first column.
 
 ```sql
 SELECT  
@@ -118,6 +124,7 @@ SELECT
         photos.user_id AS 'UserId',
         users.username AS 'Username',
         COUNT(likes.photo_id) AS 'No. of Likes'
+        -- Selecting the photo_id, user_id, username and the No. of likes on the photo.
 FROM likes
 JOIN photos ON likes.photo_id = photos.id
 JOIN users ON photos.user_id = users.id
@@ -134,16 +141,21 @@ mysql> source insta_task.sql
 +---------+--------+---------------+--------------+
 1 row in set (0.01 sec)
 ```
+- The winner of the contest is `Zack_Kemmer93` with `48 Likes` on his photo.
+- Further improvements that can be made is selecting the `photo's link` as well.
+## 
 #### Q4. Hashtag Researching: A partner brand wants to know, which hashtags to use in the post to reach the most people on the platform.
      *Task:* Identify and suggest the top 5 most commonly used hashtags on the platform.
-Let’s breakdown the question:
-<p></p>
+Let’s breakdown the question:<br>
+
+using `INNER JOIN` between the `tags` and `photo_tags` tables, we have determined the 5 most commonly used tags using the `GROUP BY`, `ORDER BY` and `LIMIT` clause.
 
 ```sql
 SELECT 
         photo_tags.tag_id AS 'TagId', 
         tags.tag_name AS 'Tag', 
         COUNT(photo_tags.tag_id) AS 'No. of Occurences'
+        -- Selecting the tag_id, tag_name, and the no. of tag_ids in the photo_tags column.
 FROM photo_tags
 JOIN tags ON tags.id = photo_tags.tag_id
 GROUP BY photo_tags.tag_id
@@ -164,6 +176,10 @@ mysql> source insta_task.sql
 +-------+---------+-------------------+
 5 rows in set (0.00 sec)
 ```
+- The most used tags on instagram is `smile` tag.
+- Followed by `beach`, `party`, `fun` and `concert`.
+
+## 
 #### Q5. Launch AD Campaign: The team wants to know, which day would be the best day to launch ADs.
      *Task:* What day of the week do most users register on? Provide insights on when to schedule an ad campaign.
 Let’s breakdown the question:
@@ -193,6 +209,12 @@ mysql> source insta_task.sql
 +-------------+----------------------+
 7 rows in set (0.02 sec)
 ```
+- As we can infer from the above output that `Thursday` and `Sunday` have the maximum no. of registrations followed by Friday.
+- As most users tend to register during the weekends (i.e. `Friday` to `Sunday`) from our analysis  nearly `43% user registrations` over the weekend and `59%` if we include `thursday` as well.
+- So to maximise the user registrations, the marketing team can run the ad campaigns from `thursdays`.
+- This result can be tweaked using time-series analysis on user's joining date, so as to reduce the cost of running Ads in the long run.
+
+## 
 ### 3️⃣ Investor Metrics: Our investors want to know if Instagram is performing well and is not becoming redundant like Facebook, they want to assess the app on the following grounds:
 
 #### Q1. User Engagement: Are users still as active and post on Instagram or they are making fewer posts.
@@ -211,11 +233,13 @@ LIMIT 10;
 
 -- Total number of photos posted on Instagram/Total no. of users that posted photos on Instagram
 SELECT 
-        ROUND(((SELECT COUNT(*) FROM photos)/(SELECT COUNT(DISTINCT user_id) FROM photos)), 2) AS '((Total number of photos posted /Total no. of DISTINCT users that posted photos) on Instagram';
+        ROUND(((SELECT COUNT(*) FROM photos)/(SELECT COUNT(DISTINCT user_id) FROM photos)), 2) 
+        AS '((Total number of photos posted /Total no. of DISTINCT users that posted photos) on Instagram';
 
 -- Total No. of Photos on Instagram/Total number of users.
 SELECT 
-        ROUND(((SELECT COUNT(*) FROM photos)/(SELECT COUNT(*) FROM users)), 2) AS '(Total No. of Photos /Total No. of Users) on Instagram';
+        ROUND(((SELECT COUNT(*) FROM photos)/(SELECT COUNT(*) FROM users)), 2) 
+        AS '(Total No. of Photos /Total No. of Users) on Instagram';
 ```
 
 ```sql
@@ -248,11 +272,10 @@ mysql> source insta_task.sql
 +--------------------------------------------------------+
 1 row in set (0.01 sec)
 ```
-
+## 
 #### Q2. Bots & Fake Accounts: The investors want to know if the platform is crowded with fake and dummy accounts.
      *Task:* Provide data on users (bots) who have liked every single photo on the site 
      (since any normal user would not be able to do this).
-Very important** as we already know that Elon backed out from the twitter deal over the wrong reporting of bots and fake accounts on the social media platform.
 ```sql
 SELECT 
         users.id AS 'User ID',
@@ -305,7 +328,11 @@ mysql> source insta_task.sql
 +---------+--------------------+
 13 rows in set (0.01 sec)
 ```
+- There are a total of `13 users` that can fall into the `bots` category.
+- This can be further narrowed down if the following users have never posted a single photo on instagram.
+- **Very important** as we already know that `Elon Musk` backed out from the twitter deal over this very issue. 
 
+## 
 ### ⚙️ Tech-Stack Used: MySQL; Code-Editor Used: VS Code
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
