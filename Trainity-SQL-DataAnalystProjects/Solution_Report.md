@@ -1,10 +1,11 @@
 # Project-2: Instagram user Analytics Report.
 ## Project Description:
 <p>In the given assignment, we must present a thorough report to Instagram's product team; the management need certain critical insights from the user schema that will be vital in driving increased user engagement for Instagram. Multiple teams will utilise the conclusions produced from the analysis for launch marketing campaigns, decide on new features for designing an app, measure the performance of the app by evaluating user engagement, and enhance the overall experience while also securing business growth.</p>
-<p>The Instagram user Analytics project will focus on producing insights using SQL as the primary analytical tool. Loading the schema in the MySQL server takes the first priority.</p>
+<p>The Instagram user Analytics project will focus on producing insights using SQL as the primary analytical tool.</p>
 
 ## ✍🏼 Approach:
 ### 1️⃣ [Creating a Database](https://github.com/Subhrajit91939/MySQL-Projects/edit/main/Trainity-SQL-DataAnalystProjects/Solution_Report.md#resources)<br>
+Loading the `schema` in the MySQL server takes the first priority.
 ```sql
 -- Selecting the `ig_clone` database.
 SHOW DATABASES;
@@ -58,12 +59,16 @@ mysql> source insta_task.sql
 +---------+------------------+---------------------+
 5 rows in set (0.00 sec)
 ```
+#### Insights:
+- The 5 Oldest users on instagram are: `Darby_Herzog`, `Emilio_Bernier52`, `Elenor88`, `Nicole71`, `Jordyn.Jacobson2`.
+- Rewarding loyal users is a great initiative to increase user engagement and retention for any company.
+
 ## 
 #### Q2. Remind Inactive Users to Start Posting: By sending them promotional emails to post their 1st photo.
      *Task:* Find the users who have never posted a single photo on Instagram.
 Let’s breakdown the question:<br>
 
-As we need to find the inactive users who never posted in Instagram, we can select all those user-ids from `users` table which are not present in the user_id column of `photos` table; I have implemented it by using a `WHERE` clause and `NOT IN` operator using a nested sub-query to retrieve the `user_id` column from the `photos` table.
+As we need to find the inactive users who never posted in Instagram, we can select all those user-ids from `users` table which are not present in the user_id column of `photos` table; I have implemented it by using a `WHERE` clause and `NOT IN` operator using a sub-query to retrieve the `user_id` column from the `photos` table.
 
 ```sql
 SELECT 
@@ -106,6 +111,7 @@ mysql> source insta_task.sql
 +---------+---------------------+
 26 rows in set (0.00 sec)
 ```
+#### Insights:
 - As we can infer that there are `26 users` who never posted on instagram, the marketing team can send out personalised emails to the following users.
 - Just not posting a picture definitely does not mean that the following users are inactive, we can also set a threshold condition to identfy them based on their joining date on the platform.
 - We can also add another condition such as the no. of likes they made; if the users are not engaged in the content on Instagram, then that means they have not like any photos posted on instagram.
@@ -141,8 +147,10 @@ mysql> source insta_task.sql
 +---------+--------+---------------+--------------+
 1 row in set (0.01 sec)
 ```
+#### Insights:
 - The winner of the contest is `Zack_Kemmer93` with `48 Likes` on his photo.
 - Further improvements that can be made is selecting the `photo's link` as well.
+
 ## 
 #### Q4. Hashtag Researching: A partner brand wants to know, which hashtags to use in the post to reach the most people on the platform.
      *Task:* Identify and suggest the top 5 most commonly used hashtags on the platform.
@@ -176,6 +184,7 @@ mysql> source insta_task.sql
 +-------+---------+-------------------+
 5 rows in set (0.00 sec)
 ```
+#### Insights:
 - The most used tags on instagram is `smile` tag.
 - Followed by `beach`, `party`, `fun` and `concert`.
 
@@ -209,6 +218,7 @@ mysql> source insta_task.sql
 +-------------+----------------------+
 7 rows in set (0.02 sec)
 ```
+#### Insights:
 - As we can infer from the above output that `Thursday` and `Sunday` have the maximum no. of registrations followed by Friday.
 - As most users tend to register during the weekends (i.e. `Friday` to `Sunday`) from our analysis  nearly `43% user registrations` over the weekend and `59%` if we include `thursday` as well.
 - So to maximise the user registrations, the marketing team can run the ad campaigns from `thursdays`.
@@ -328,7 +338,8 @@ mysql> source insta_task.sql
 +---------+--------------------+
 13 rows in set (0.01 sec)
 ```
-- There are a total of `13 users` that can fall into the `bots` category.
+#### Insights:
+- There are a total of `13 users` that fall into the `bots` category.
 - This can be further narrowed down if the following users have never posted a single photo on instagram.
 - **Very important** as we already know that `Elon Musk` backed out from the twitter deal over this very issue. 
 
@@ -336,9 +347,6 @@ mysql> source insta_task.sql
 ### ⚙️ Tech-Stack Used: MySQL; Code-Editor Used: VS Code
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
-
-## 📊📈 Insights:
-Jot down the insights and the knowledge you gained while making the project. You need to write what you infer about the things. Make sure it's brief and up to the point only. For Eg. If you got a graph then what do you understand by the graph, what changes can you make or what can you derive from the graph.
 
 ## 🎯 Result:
 Mention what have you achieved while making the project and how do you think it has helped you.
